@@ -1,26 +1,294 @@
 @import "tailwindcss";
 
+/* ========================================
+   تعريفات الخطوط - Fonts
+   ======================================== */
+
+/* الخطوط العربية - Dubai */
+@font-face {
+  font-family: 'Dubai';
+  src: url('/fonts/Dubai-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Dubai';
+  src: url('/fonts/Dubai-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Dubai';
+  src: url('/fonts/Dubai-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* الخطوط الإنجليزية - Bristone */
+@font-face {
+  font-family: 'Bristone';
+  src: url('/fonts/Bristone-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bristone';
+  src: url('/fonts/Bristone-Reg.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bristone';
+  src: url('/fonts/Bristone-Thin.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ========================================
+   متغيرات الألوان - Colors
+   ======================================== */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* الألوان الرئيسية */
+  --primary-gold: #edbf8c;
+  --primary-dark: #10302b;
+  --primary-light: #ead3b9;
+  --background-light: #f8f5f0;
+  --text-dark: #10302b;
+  --text-light: #ffffff;
+  
+  /* ألوان إضافية */
+  --gold-hover: #d9a870;
+  --background-white: #ffffff;
+  --gray-100: #f5f5f5;
+  --gray-200: #e5e5e5;
+  --gray-300: #d4d4d4;
+  --gray-400: #a3a3a3;
+  --gray-500: #737373;
+  --gray-600: #525252;
+  --gray-700: #404040;
+  --gray-800: #262626;
+  --gray-900: #171717;
+  
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 24px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
+  --shadow-gold: 0 4px 12px rgba(237, 191, 140, 0.3);
+  --shadow-gold-hover: 0 6px 20px rgba(237, 191, 140, 0.4);
+  
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+  
+  /* Border Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-2xl: 24px;
+  --radius-3xl: 32px;
+  
+  /* Spacing */
+  --spacing-section-desktop: 80px;
+  --spacing-section-mobile: 48px;
+  --container-max-width: 1280px;
+  
+  /* الخطوط */
+  --font-arabic: 'Dubai', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-english: 'Bristone', Georgia, serif;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-primary-gold: var(--primary-gold);
+  --color-primary-dark: var(--primary-dark);
+  --color-primary-light: var(--primary-light);
+  --color-background-light: var(--background-light);
+  --color-text-dark: var(--text-dark);
+  --color-text-light: var(--text-light);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ========================================
+   إعدادات عامة - General
+   ======================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  direction: rtl;
+  font-size: 16px;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--background-white);
+  color: var(--text-dark);
+  font-family: var(--font-arabic);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* للنصوص الإنجليزية */
+.font-english {
+  font-family: var(--font-english);
+}
+
+/* ========================================
+   Typography
+   ======================================== */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-arabic);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text-dark);
+}
+
+h1 {
+  font-size: clamp(2.5rem, 5vw, 3.5rem); /* 40-56px */
+}
+
+h2 {
+  font-size: clamp(2rem, 4vw, 2.5rem); /* 32-40px */
+}
+
+h3 {
+  font-size: clamp(1.5rem, 3vw, 2rem); /* 24-32px */
+}
+
+h4 {
+  font-size: clamp(1.25rem, 2.5vw, 1.5rem); /* 20-24px */
+}
+
+p {
+  font-size: 1.125rem; /* 18px */
+  line-height: 1.75;
+  font-weight: 300;
+}
+
+/* ========================================
+   Utility Classes
+   ======================================== */
+
+.container {
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: 0 2rem;
+  }
+}
+
+.section-padding {
+  padding: var(--spacing-section-mobile) 0;
+}
+
+@media (min-width: 1024px) {
+  .section-padding {
+    padding: var(--spacing-section-desktop) 0;
+  }
+}
+
+/* ========================================
+   Animations
+   ======================================== */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ========================================
+   Scrollbar Styling
+   ======================================== */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--gray-100);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-gold);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold-hover);
+}
+
+/* ========================================
+   Selection Styling
+   ======================================== */
+
+::selection {
+  background: var(--primary-gold);
+  color: var(--primary-dark);
+}
+
+::-moz-selection {
+  background: var(--primary-gold);
+  color: var(--primary-dark);
 }
